@@ -1,0 +1,55 @@
+{% extends 'users/base.html' %}
+{% block content %}
+<div class="container">
+    <a href="{% url 'logout' %}" class="btn btn-warning mt-5 ">Logout</a>
+<div class="row">
+    <div class="col-md-12 col-lg-4 "  style="padding-top:100px">
+        <h1>Add Product</h1>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Upload</button>
+  </form>
+
+</div>
+     <div class=" col-md-12 col-lg-8 ">
+         <h1 style="text-align:center;padding-top:100px" >Product List</h1>
+         <table class="table">
+  <thead class="thead-dark">
+    <tr>
+        <th>ID</th>
+        <th>Image</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>status</th>
+        <th>Action</th>
+
+
+    </tr>
+  </thead>
+  <tbody>
+   {% for pro in pr %}
+    <tr>
+        <td>{{ pro.id }}</td>
+        <td><img src="{{ pro.image.url }}" class="img-responsive" style="width: 100px;height100px; float: left; margin-right: 10px;" /></td>
+        <td>{{ pro.name }}</td>
+        <td>{{ pro.price }}</td>
+        <td>{{ pro.quantity }}</td>
+        <td>{{ pro.status }}</td>
+        <td><a href="{% url 'update' pro.id %}" class="btn btn-warning">Edit</a>
+        <form action="{% url 'delete' pro.id %}" method="post" class="d-inline">
+           {% csrf_token %}
+            <input type="submit" class="btn btn-danger" value="Delete" >
+        </form></td>
+
+
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+     </div>
+
+</div>
+</div>
+{% endblock content %}
