@@ -33,5 +33,6 @@ class Products(models.Model):
     def reg(self):
         self.save()
 
+
     def __str__(self):
         return (self.name)

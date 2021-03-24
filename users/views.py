@@ -17,7 +17,8 @@ def index(request):
 
 
 def customer(request):
-    return HttpResponse("customer Page")
+    pro = Products.objects.exclude(status='Inactive')
+    return render(request, 'users/customer.html', { 'pr': pro})
 
 # def admin(request):
 #     if request.method == 'GET':
@@ -47,7 +48,7 @@ def admin(request):
 def update_data(request,id):
     if request.method == 'POST':
         pi = Products.objects.get(pk=id)
-        form = ProductsForm(request.POST,instance=pi)
+        form = ProductsForm(request.POST,request.FILES,instance=pi)
         if form.is_valid():
             form.save()
     else:
