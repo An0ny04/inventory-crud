@@ -2,7 +2,7 @@
 {% block content %}
 <div class="container">
     <a href="{% url 'logout' %}" class="btn btn-warning mt-5 ">Logout</a>
-    <a href="{% url 'logout' %}" class="btn btn-warning mt-5 ">MyCart</a>
+    <a href="{% url 'mycart' %}" class="btn btn-warning mt-5 ">MyCart</a>
 <div class="row">
      <div class=" col-md-12 col-lg-8 ">
          <h1 style="text-align:center;padding-top:100px" >Product List</h1>
@@ -27,7 +27,7 @@
         <td>{{ pro.name }}</td>
         <td>{{ pro.price }}</td>
         <td>{{ pro.quantity }}</td>
-        <td><form action="{% url 'delete' pro.id %}" method="post" class="d-inline">
+        <td><form action="{% url 'cart' pro.id %}" method="post" class="d-inline">
            {% csrf_token %}
             <input type="submit" class="btn btn-primary" value="Add To Cart" >
         </form>
